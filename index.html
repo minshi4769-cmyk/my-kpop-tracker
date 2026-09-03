@@ -8,21 +8,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --pink-50:#FFF4F8;
-    --pink-100:#FFE4EE;
-    --pink-200:#FFC9DE;
-    --pink-300:#FFA5C6;
-    --pink-400:#FF7EAD;
-    --pink-500:#FF5C99;
-    --pink-600:#E8447F;
-    --pink-700:#C22C63;
-    --lav-100:#F1E8FB;
-    --lav-300:#D9C2F0;
-    --lav-500:#B48EDE;
-    --plum-900:#4A2540;
-    --plum-700:#6B3960;
-    --plum-500:#8C5580;
-    --cream:#FFFBF9;
+    --pink-50:#FFF3FA;
+    --pink-100:#FCE4F3;
+    --pink-200:#F8C6E6;
+    --pink-300:#F2A0D6;
+    --pink-400:#EE7FCB;
+    --pink-500:#E85CB8;
+    --pink-600:#D63FA0;
+    --pink-700:#B32A82;
+    --lav-50:#F5F0FC;
+    --lav-100:#EAE0FA;
+    --lav-200:#D9C7F5;
+    --lav-300:#C3A8EF;
+    --lav-400:#AB8AE6;
+    --lav-500:#9370DB;
+    --lav-600:#7856C0;
+    --plum-900:#3D2657;
+    --plum-700:#5B3D7D;
+    --plum-500:#84709F;
+    --cream:#FDFBFF;
     --white:#FFFFFF;
     --arrived:#5FBE8E;
     --arrived-bg:#E4F6EC;
@@ -31,17 +35,19 @@
     --sold:#9B8AA8;
     --sold-bg:#EFEAF5;
     --danger:#E85D6B;
-    --shadow-pink: 0 8px 24px rgba(232,68,127,0.13);
-    --shadow-soft: 0 2px 10px rgba(140,85,128,0.08);
+    --shadow-pink: 0 8px 24px rgba(147,112,219,0.16);
+    --shadow-soft: 0 2px 10px rgba(120,86,192,0.09);
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
     font-family:'Noto Sans TC','Baloo 2',sans-serif;
-    background:
-      radial-gradient(circle at 15% 0%, var(--pink-100) 0%, transparent 45%),
-      radial-gradient(circle at 90% 10%, var(--lav-100) 0%, transparent 40%),
-      linear-gradient(180deg, var(--pink-50) 0%, var(--cream) 40%);
+    background-image:
+      url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMzQwIiB2aWV3Qm94PSIwIDAgMzQwIDM0MCI+PHRleHQgeD0iMTgiIHk9IjI4IiBmb250LXNpemU9IjI0IiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMTUwIiB5PSIxOCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1vcGFjaXR5PSIwLjk1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjMwMCIgeT0iNDUiIGZvbnQtc2l6ZT0iMjQiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC45NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSI3MCIgeT0iMTQwIiBmb250LXNpemU9IjI2IiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjMwIiB5PSIxMjAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC45NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSIyMCIgeT0iMjMwIiBmb250LXNpemU9IjIwIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMTgwIiB5PSIyMTAiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC45NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSIzMjAiIHk9IjE5MCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1vcGFjaXR5PSIwLjk1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjEwMCIgeT0iMzAwIiBmb250LXNpemU9IjI0IiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjgwIiB5PSIzMjAiIGZvbnQtc2l6ZT0iMjYiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC45NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSI0MCIgeT0iMzIwIiBmb250LXNpemU9IjIwIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iNjAiIHk9IjgwIiBmb250LXNpemU9IjIyIiBmaWxsPSIjOUI3MkQ2IiBmaWxsLW9wYWNpdHk9IjAuODUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjIwIiB5PSI3MCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzlCNzJENiIgZmlsbC1vcGFjaXR5PSIwLjg1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjE0MCIgeT0iMTYwIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOUI3MkQ2IiBmaWxsLW9wYWNpdHk9IjAuODUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMzAwIiB5PSIxNTAiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM5QjcyRDYiIGZpbGwtb3BhY2l0eT0iMC44NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSI1MCIgeT0iMjYwIiBmb250LXNpemU9IjIwIiBmaWxsPSIjOUI3MkQ2IiBmaWxsLW9wYWNpdHk9IjAuODUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjYwIiB5PSIyNTAiIGZvbnQtc2l6ZT0iMjAiIGZpbGw9IiM5QjcyRDYiIGZpbGwtb3BhY2l0eT0iMC44NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSIxODAiIHk9IjMyMCIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzlCNzJENiIgZmlsbC1vcGFjaXR5PSIwLjg1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjEyMCIgeT0iNDAiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iIzdGQjBFOCIgZmlsbC1vcGFjaXR5PSIwLjc1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjI2MCIgeT0iMTEwIiBmb250LXNpemU9IjgiIGZpbGw9IiM3RkIwRTgiIGZpbGwtb3BhY2l0eT0iMC43NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSIzMCIgeT0iMTgwIiBmb250LXNpemU9IjExIiBmaWxsPSIjN0ZCMEU4IiBmaWxsLW9wYWNpdHk9IjAuNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjAwIiB5PSIyNjAiIGZvbnQtc2l6ZT0iMTAiIGZpbGw9IiM3RkIwRTgiIGZpbGwtb3BhY2l0eT0iMC43NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSIzMjAiIHk9IjYwIiBmb250LXNpemU9IjgiIGZpbGw9IiM3RkIwRTgiIGZpbGwtb3BhY2l0eT0iMC43NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSI5MCIgeT0iMjIwIiBmb250LXNpemU9IjExIiBmaWxsPSIjN0ZCMEU4IiBmaWxsLW9wYWNpdHk9IjAuNzUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjUwIiB5PSIzMDAiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iIzdGQjBFOCIgZmlsbC1vcGFjaXR5PSIwLjc1IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIxMTAiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iI0YwQTBEMCIgZmlsbC1vcGFjaXR5PSIwLjciIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMTYwIiB5PSI5MCIgZm9udC1zaXplPSIxMSIgZmlsbD0iI0YwQTBEMCIgZmlsbC1vcGFjaXR5PSIwLjciIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiI+JiMxMDAyMjs8L3RleHQ+PHRleHQgeD0iMjgwIiB5PSIyMDAiIGZvbnQtc2l6ZT0iMTEiIGZpbGw9IiNGMEEwRDAiIGZpbGwtb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjExMCIgeT0iMjUwIiBmb250LXNpemU9IjExIiBmaWxsPSIjRjBBMEQwIiBmaWxsLW9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48dGV4dCB4PSIyMjAiIHk9IjMwIiBmb250LXNpemU9IjgiIGZpbGw9IiNGMEEwRDAiIGZpbGwtb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjEwIiB5PSIyOTAiIGZvbnQtc2l6ZT0iMTEiIGZpbGw9IiNGMEEwRDAiIGZpbGwtb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPiYjMTAwMjI7PC90ZXh0Pjx0ZXh0IHg9IjMzMCIgeT0iMjcwIiBmb250LXNpemU9IjExIiBmaWxsPSIjRjBBMEQwIiBmaWxsLW9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIj4mIzEwMDIyOzwvdGV4dD48Y2lyY2xlIGN4PSIyMzEiIGN5PSIyODYiIHI9IjEuNSIgZmlsbD0iI0M5QTBFOCIgZmlsbC1vcGFjaXR5PSIwLjQ2Ii8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iOTciIHI9IjAuOSIgZmlsbD0iI0M5QTBFOCIgZmlsbC1vcGFjaXR5PSIwLjUxIi8+PGNpcmNsZSBjeD0iOTUiIGN5PSI0OCIgcj0iMS4yIiBmaWxsPSIjRjBBMEQwIiBmaWxsLW9wYWNpdHk9IjAuMzciLz48Y2lyY2xlIGN4PSIzMjQiIGN5PSIyMSIgcj0iMS4zIiBmaWxsPSIjQzlBMEU4IiBmaWxsLW9wYWNpdHk9IjAuNTkiLz48Y2lyY2xlIGN4PSIzMzQiIGN5PSIzMTUiIHI9IjEuMyIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1vcGFjaXR5PSIwLjU2Ii8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMCIgcj0iMC44IiBmaWxsPSIjRjBBMEQwIiBmaWxsLW9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjIzNyIgY3k9IjE2NyIgcj0iMS4yIiBmaWxsPSIjRjBBMEQwIiBmaWxsLW9wYWNpdHk9IjAuNDgiLz48Y2lyY2xlIGN4PSIzMjciIGN5PSIxNTAiIHI9IjEuMiIgZmlsbD0iI0ZGRkZGRiIgZmlsbC1vcGFjaXR5PSIwLjQ2Ii8+PGNpcmNsZSBjeD0iMTQyIiBjeT0iMjA4IiByPSIxLjYiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC41MyIvPjxjaXJjbGUgY3g9IjE2MSIgY3k9IjExNyIgcj0iMS4yIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuMzciLz48Y2lyY2xlIGN4PSI1NSIgY3k9IjIwNSIgcj0iMC45IiBmaWxsPSIjN0ZCMEU4IiBmaWxsLW9wYWNpdHk9IjAuNDUiLz48Y2lyY2xlIGN4PSI4IiBjeT0iMCIgcj0iMS4wIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuNDciLz48Y2lyY2xlIGN4PSIyMDMiIGN5PSIyMTQiIHI9IjAuOSIgZmlsbD0iI0YwQTBEMCIgZmlsbC1vcGFjaXR5PSIwLjU0Ii8+PGNpcmNsZSBjeD0iMTM4IiBjeT0iMTcyIiByPSIwLjkiIGZpbGw9IiM3RkIwRTgiIGZpbGwtb3BhY2l0eT0iMC4zNSIvPjxjaXJjbGUgY3g9IjIwOSIgY3k9IjYwIiByPSIwLjkiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC4zNSIvPjxjaXJjbGUgY3g9IjIzOCIgY3k9IjI0OSIgcj0iMC45IiBmaWxsPSIjRjBBMEQwIiBmaWxsLW9wYWNpdHk9IjAuNDYiLz48Y2lyY2xlIGN4PSI5NyIgY3k9IjY3IiByPSIxLjEiIGZpbGw9IiNDOUEwRTgiIGZpbGwtb3BhY2l0eT0iMC4zOCIvPjxjaXJjbGUgY3g9IjIxNSIgY3k9IjEwOCIgcj0iMC44IiBmaWxsPSIjN0ZCMEU4IiBmaWxsLW9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMTA3IiByPSIwLjkiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC4zNiIvPjxjaXJjbGUgY3g9Ijc0IiBjeT0iMTA5IiByPSIxLjIiIGZpbGw9IiNGRkZGRkYiIGZpbGwtb3BhY2l0eT0iMC41NCIvPjxjaXJjbGUgY3g9IjE2OCIgY3k9IjE1MSIgcj0iMS4xIiBmaWxsPSIjRkZGRkZGIiBmaWxsLW9wYWNpdHk9IjAuMzciLz48Y2lyY2xlIGN4PSIyOTgiIGN5PSIzMjUiIHI9IjEuMCIgZmlsbD0iIzdGQjBFOCIgZmlsbC1vcGFjaXR5PSIwLjQ0Ii8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iNjUiIHI9IjEuNiIgZmlsbD0iI0M5QTBFOCIgZmlsbC1vcGFjaXR5PSIwLjU2Ii8+PGNpcmNsZSBjeD0iNjkiIGN5PSIxOTciIHI9IjAuOSIgZmlsbD0iI0YwQTBEMCIgZmlsbC1vcGFjaXR5PSIwLjQzIi8+PGNpcmNsZSBjeD0iMTE2IiBjeT0iMzEyIiByPSIxLjAiIGZpbGw9IiNGMEEwRDAiIGZpbGwtb3BhY2l0eT0iMC4zOSIvPjxjaXJjbGUgY3g9IjMyMiIgY3k9IjI4MyIgcj0iMS4wIiBmaWxsPSIjQzlBMEU4IiBmaWxsLW9wYWNpdHk9IjAuNTciLz48L3N2Zz4="),
+      linear-gradient(160deg, #B7CBEF 0%, #C6BBE9 20%, #D3AFE6 38%, #E2A9DE 54%, #EFAAD1 68%, #F4B4C2 82%, #F8C7AE 100%);
+    background-repeat: repeat, no-repeat;
+    background-size: 340px 340px, cover;
+    background-attachment: fixed, fixed;
     color:var(--plum-900);
     min-height:100vh;
     -webkit-font-smoothing:antialiased;
@@ -50,73 +56,62 @@
 
   /* HEADER */
   .hero{
-    background:linear-gradient(135deg, var(--pink-400) 0%, var(--pink-500) 55%, var(--lav-500) 100%);
-    padding:28px 20px 22px;
-    border-radius:0 0 28px 28px;
-    box-shadow:var(--shadow-pink);
+    padding:24px 20px 6px;
     position:relative;
-    overflow:hidden;
-  }
-  .hero::after{
-    content:"";
-    position:absolute; right:-30px; top:-30px; width:140px; height:140px;
-    background:rgba(255,255,255,0.15); border-radius:50%;
-  }
-  .hero::before{
-    content:"";
-    position:absolute; left:-40px; bottom:-50px; width:120px; height:120px;
-    background:rgba(255,255,255,0.10); border-radius:50%;
   }
   .hero-top{ display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1; }
-  .hero-title{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:22px; color:#fff; margin:0; letter-spacing:0.5px; }
-  .hero-sub{ font-size:12.5px; color:rgba(255,255,255,0.88); margin:4px 0 0; }
+  .hero-title{ font-family:'Baloo 2',sans-serif; font-weight:700; font-size:23px; color:var(--pink-600); margin:0; letter-spacing:0.5px; text-shadow:0 1px 12px rgba(255,255,255,0.5); }
+  .hero-sub{ font-size:12.5px; color:var(--plum-700); margin:4px 0 0; }
   .icon-btn{
     width:38px; height:38px; border-radius:50%; border:none;
-    background:rgba(255,255,255,0.25); color:#fff; font-size:18px;
+    background:rgba(255,255,255,0.55); color:var(--plum-700); font-size:18px;
     display:flex; align-items:center; justify-content:center; cursor:pointer;
     backdrop-filter:blur(2px);
   }
   .icon-btn:active{ transform:scale(0.92); }
 
-  .stat-row{ display:flex; gap:10px; margin-top:18px; position:relative; z-index:1; }
+  .stat-row{ display:flex; gap:10px; margin-top:16px; position:relative; z-index:1; }
   .stat-card{
-    flex:1; background:rgba(255,255,255,0.92); border-radius:16px; padding:10px 12px;
+    flex:1; background:rgba(255,255,255,0.85); border-radius:16px; padding:10px 12px;
   }
   .stat-label{ font-size:11px; color:var(--plum-500); margin:0 0 2px; }
   .stat-value{ font-family:'Baloo 2',sans-serif; font-size:16px; font-weight:700; color:var(--pink-600); margin:0; }
 
-  /* IDOL CHIPS */
+  /* IDOL AVATARS */
   .idol-scroll{
-    display:flex; gap:8px; overflow-x:auto; padding:16px 16px 4px;
+    display:flex; gap:14px; overflow-x:auto; padding:18px 16px 6px;
     scrollbar-width:none;
   }
   .idol-scroll::-webkit-scrollbar{ display:none; }
   .idol-chip{
-    flex:0 0 auto; display:flex; align-items:center; gap:6px;
-    padding:8px 14px; border-radius:999px; border:1.5px solid var(--pink-200);
-    background:var(--white); font-size:13px; font-weight:500; color:var(--plum-700);
-    cursor:pointer; white-space:nowrap;
+    flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:6px;
+    cursor:pointer; width:58px;
   }
-  .idol-chip.active{
-    background:linear-gradient(135deg,var(--pink-400),var(--pink-500));
-    border-color:transparent; color:#fff; box-shadow:var(--shadow-soft);
+  .idol-avatar{
+    width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Baloo 2',sans-serif; font-weight:700; font-size:19px;
+    border:2.5px solid transparent; box-shadow:var(--shadow-soft);
   }
-  .idol-dot{ width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+  .idol-chip.active .idol-avatar{ border-color:var(--pink-500); box-shadow:0 0 0 3px var(--pink-100); }
+  .idol-chip-label{ font-size:11.5px; color:var(--plum-700); text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:58px; }
+  .idol-chip.active .idol-chip-label{ color:var(--pink-600); font-weight:700; }
+  .idol-chip[data-idol="all"] .idol-avatar{ background:linear-gradient(135deg,var(--lav-400),var(--pink-400)); }
   .idol-chip-add{
-    flex:0 0 auto; width:34px; height:34px; border-radius:50%;
-    background:var(--lav-100); border:1.5px dashed var(--lav-500);
-    color:var(--lav-500); font-size:16px; display:flex; align-items:center; justify-content:center; cursor:pointer;
+    flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:6px; width:58px; cursor:pointer;
+  }
+  .idol-chip-add .idol-avatar{
+    background:var(--lav-50); border:1.5px dashed var(--lav-400); color:var(--lav-500); font-size:20px; box-shadow:none;
   }
 
   /* TABS */
-  .tabs{ display:flex; gap:6px; padding:14px 16px 6px; }
+  .tabs{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; padding:14px 16px 6px; }
   .tab-btn{
-    flex:1; text-align:center; padding:10px 4px; border-radius:14px;
-    border:none; background:var(--white); color:var(--plum-500); font-size:13.5px; font-weight:500;
+    text-align:center; padding:10px 4px; border-radius:999px;
+    border:none; background:var(--white); color:var(--plum-500); font-size:13px; font-weight:500;
     cursor:pointer; box-shadow:var(--shadow-soft);
   }
   .tab-btn.active{
-    background:linear-gradient(135deg,var(--pink-500),var(--pink-600)); color:#fff;
+    background:linear-gradient(135deg,var(--pink-500),var(--lav-500)); color:#fff;
   }
 
   .content{ padding:10px 16px 0; }
@@ -133,7 +128,7 @@
   /* ITEM CARD */
   .item-card{
     background:var(--white); border-radius:18px; padding:12px; margin-bottom:12px;
-    display:flex; gap:12px; box-shadow:var(--shadow-soft); border:1px solid #FFF0F5;
+    display:flex; gap:12px; box-shadow:var(--shadow-soft); border:1px solid var(--lav-100);
     cursor:pointer;
   }
   .item-photo{
@@ -153,6 +148,16 @@
   .tag-status-arrived{ background:var(--arrived-bg); color:var(--arrived); }
   .tag-status-notarrived{ background:var(--notarrived-bg); color:var(--notarrived); }
   .tag-status-sold{ background:var(--sold-bg); color:var(--sold); }
+  .tag-trade-open{ background:var(--arrived-bg); color:var(--arrived); }
+  .tag-trade-matched{ background:var(--sold-bg); color:var(--sold); }
+  .tag-trade-free{ background:var(--notarrived-bg); color:var(--notarrived); }
+  .tag-trade-list{ background:var(--lav-100); color:var(--lav-600); }
+
+  .photo-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .photo-grid-item{ position:relative; border-radius:12px; overflow:hidden; aspect-ratio:1/1; cursor:pointer; background:var(--lav-50); box-shadow:var(--shadow-soft); }
+  .photo-grid-item img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .photo-caption{ position:absolute; bottom:0; left:0; right:0; background:rgba(61,38,87,0.55); color:#fff; font-size:10px; padding:3px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .lightbox-img{ width:100%; border-radius:16px; display:block; margin-bottom:10px; }
   .item-date{ font-size:10.5px; color:var(--plum-500); }
 
   .empty-state{ text-align:center; padding:60px 20px; color:var(--plum-500); }
@@ -294,6 +299,7 @@ var IDOL_COLORS = ["#FF7EAD","#B48EDE","#5FBE8E","#F2A94C","#6FB6E0","#E85D6B","
 var state = {
   idols: [],
   items: [],
+  trades: [],
   filterIdol: "all",
   tab: "expense",
   wishFilter: "all",
@@ -328,49 +334,81 @@ function toast(msg){
   t._timer = setTimeout(function(){ t.classList.remove('show'); }, 1800);
 }
 
-/* ---------- STORAGE ---------- */
+/* ---------- STORAGE (Firebase Realtime Database) ---------- */
+var FIREBASE_URL = "https://idol-expense-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+async function fbGet(path){
+  try{
+    var res = await fetch(FIREBASE_URL + "/" + path + ".json");
+    if(!res.ok) return null;
+    return await res.json();
+  }catch(e){ return null; }
+}
+async function fbPut(path, data){
+  try{
+    var res = await fetch(FIREBASE_URL + "/" + path + ".json", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    return res.ok;
+  }catch(e){ return false; }
+}
+async function fbDelete(path){
+  try{
+    var res = await fetch(FIREBASE_URL + "/" + path + ".json", { method: "DELETE" });
+    return res.ok;
+  }catch(e){ return false; }
+}
+
 async function loadAll(){
   try{
-    var idolsRes = await window.storage.get('idols', true).catch(function(){ return null; });
-    state.idols = idolsRes ? JSON.parse(idolsRes.value) : [];
+    var idolsData = await fbGet('idols');
+    state.idols = Array.isArray(idolsData) ? idolsData : [];
   }catch(e){ state.idols = []; }
 
   try{
-    var settingsRes = await window.storage.get('settings', true).catch(function(){ return null; });
-    if(settingsRes){
-      var s = JSON.parse(settingsRes.value);
-      if(s.rates) state.rates = s.rates;
-    }
+    var settingsData = await fbGet('settings');
+    if(settingsData && settingsData.rates) state.rates = settingsData.rates;
   }catch(e){}
 
   try{
-    var idx = await window.storage.list('item:', true).catch(function(){ return null; });
-    var keys = idx && idx.keys ? idx.keys : [];
-    var items = [];
-    for(var i=0;i<keys.length;i++){
-      try{
-        var r = await window.storage.get(keys[i], true);
-        if(r) items.push(JSON.parse(r.value));
-      }catch(e){}
-    }
+    var itemsData = await fbGet('items');
+    var items = itemsData ? Object.keys(itemsData).map(function(k){ return itemsData[k]; }) : [];
     items.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
     state.items = items;
   }catch(e){ state.items = []; }
+
+  try{
+    var tradesData = await fbGet('trades');
+    var trades = tradesData ? Object.keys(tradesData).map(function(k){ return tradesData[k]; }) : [];
+    trades.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+    state.trades = trades;
+  }catch(e){ state.trades = []; }
 
   state.loaded = true;
 }
 
 async function saveIdols(){
-  await window.storage.set('idols', JSON.stringify(state.idols), true).catch(function(){ toast('儲存失敗'); });
+  var ok = await fbPut('idols', state.idols);
+  if(!ok) toast('儲存失敗，請檢查網路連線');
 }
 async function saveSettings(){
-  await window.storage.set('settings', JSON.stringify({rates: state.rates}), true).catch(function(){});
+  await fbPut('settings', {rates: state.rates});
 }
 async function saveItem(item){
-  await window.storage.set('item:'+item.id, JSON.stringify(item), true).catch(function(){ toast('儲存失敗'); });
+  var ok = await fbPut('items/'+item.id, item);
+  if(!ok) toast('儲存失敗，請檢查網路連線');
 }
 async function deleteItemStorage(id){
-  await window.storage.delete('item:'+id, true).catch(function(){});
+  await fbDelete('items/'+id);
+}
+async function saveTrade(trade){
+  var ok = await fbPut('trades/'+trade.id, trade);
+  if(!ok) toast('儲存失敗，請檢查網路連線');
+}
+async function deleteTradeStorage(id){
+  await fbDelete('trades/'+id);
 }
 
 /* ---------- SEED DEFAULT ---------- */
@@ -396,14 +434,18 @@ function filteredItems(){
 }
 
 function computeStats(){
-  var totalSpent = 0, totalSold = 0;
+  var totalSpent = 0, totalSold = 0, wishlistTotal = 0;
   state.items.forEach(function(it){
+    if(it.listType === 'wishlist'){
+      wishlistTotal += toTWD(parseFloat(it.price)||0, it.currency);
+      return;
+    }
     if(it.listType !== 'expense') return;
     var twd = toTWD(parseFloat(it.price)||0, it.currency);
     if(it.action === 'sold') totalSold += twd;
     else totalSpent += twd;
   });
-  return { totalSpent: totalSpent, totalSold: totalSold, net: totalSpent - totalSold };
+  return { totalSpent: totalSpent, totalSold: totalSold, net: totalSpent - totalSold, wishlistTotal: wishlistTotal };
 }
 
 function render(){
@@ -417,36 +459,49 @@ function render(){
 
   html += '<div class="hero">';
   html += '  <div class="hero-top">';
-  html += '    <div><p class="hero-title">追星記帳本</p><p class="hero-sub">公開共用版・任何人都能一起記錄 ✧</p></div>';
+  html += '    <div><p class="hero-title">追星記帳本</p><p class="hero-sub">目前總花費 NT$ '+fmtMoney(stats.totalSpent)+'</p></div>';
   html += '    <button class="icon-btn" id="settingsBtn" title="匯率設定">⚙</button>';
-  html += '  </div>';
-  html += '  <div class="stat-row">';
-  html += '    <div class="stat-card"><p class="stat-label">總支出</p><p class="stat-value">NT$ '+fmtMoney(stats.totalSpent)+'</p></div>';
-  html += '    <div class="stat-card"><p class="stat-label">售出回收</p><p class="stat-value">NT$ '+fmtMoney(stats.totalSold)+'</p></div>';
-  html += '    <div class="stat-card"><p class="stat-label">淨支出</p><p class="stat-value">NT$ '+fmtMoney(stats.net)+'</p></div>';
   html += '  </div>';
   html += '</div>';
 
   html += '<div class="idol-scroll" id="idolScroll">';
-  html += '  <div class="idol-chip'+(state.filterIdol==='all'?' active':'')+'" data-idol="all">全部</div>';
+  html += '  <div class="idol-chip'+(state.filterIdol==='all'?' active':'')+'" data-idol="all"><div class="idol-avatar">全部</div><div class="idol-chip-label">全部</div></div>';
   state.idols.forEach(function(idol){
+    var initial = (idol.name||'').slice(0,1);
     html += '  <div class="idol-chip'+(state.filterIdol===idol.id?' active':'')+'" data-idol="'+idol.id+'">';
-    html += '    <span class="idol-dot" style="background:'+idol.color+'"></span>'+esc(idol.name);
+    html += '    <div class="idol-avatar" style="background:'+idol.color+'">'+esc(initial)+'</div>';
+    html += '    <div class="idol-chip-label">'+esc(idol.name)+'</div>';
     html += '  </div>';
   });
-  html += '  <div class="idol-chip-add" id="addIdolBtn">＋</div>';
+  html += '  <div class="idol-chip-add" id="addIdolBtn"><div class="idol-avatar">＋</div><div class="idol-chip-label">新增</div></div>';
   html += '</div>';
+
+  html += '<div class="stat-row" style="padding:0 16px;margin-top:14px;">';
+  html += '    <div class="stat-card"><p class="stat-label">總支出</p><p class="stat-value">NT$ '+fmtMoney(stats.totalSpent)+'</p></div>';
+  html += '    <div class="stat-card"><p class="stat-label">售出回收</p><p class="stat-value">NT$ '+fmtMoney(stats.totalSold)+'</p></div>';
+  html += '    <div class="stat-card"><p class="stat-label">願望清單</p><p class="stat-value">NT$ '+fmtMoney(stats.wishlistTotal)+'</p></div>';
+  html += '  </div>';
 
   html += '<div class="tabs">';
   html += '  <button class="tab-btn'+(state.tab==='expense'?' active':'')+'" data-tab="expense">消費清單</button>';
   html += '  <button class="tab-btn'+(state.tab==='wishlist'?' active':'')+'" data-tab="wishlist">願望清單</button>';
-  html += '  <button class="tab-btn'+(state.tab==='stats'?' active':'')+'" data-tab="stats">總覽</button>';
+  html += '  <button class="tab-btn'+(state.tab==='trade'?' active':'')+'" data-tab="trade">應援交換</button>';
+  html += '  <button class="tab-btn'+(state.tab==='photos'?' active':'')+'" data-tab="photos">照片牆</button>';
   html += '</div>';
 
   html += '<div class="content">';
 
-  if(state.tab === 'stats'){
-    html += renderStats();
+  if(state.tab === 'trade'){
+    var trades = state.trades.filter(function(t){
+      return state.filterIdol === 'all' || t.idolId === state.filterIdol;
+    });
+    if(trades.length === 0){
+      html += '<div class="empty-state"><div class="emoji">🔄</div><p>還沒有應援交換的貼文</p><p>點右下角的「＋」新增一筆吧</p></div>';
+    } else {
+      trades.forEach(function(t){ html += renderTradeCard(t); });
+    }
+  } else if(state.tab === 'photos'){
+    html += renderPhotoWall();
   } else {
     if(state.tab === 'expense'){
       html += '<div class="filter-row">';
@@ -497,6 +552,56 @@ function renderItemCard(it){
   html += '    <span class="item-date">'+fmtDate(it.date)+'</span>';
   html += '  </div>';
   html += '</div></div>';
+  return html;
+}
+
+function renderTradeCard(t){
+  var idol = idolById(t.idolId);
+  var photo = (t.photos && t.photos[0]) ? '<img class="item-photo" src="'+t.photos[0]+'">' : '<div class="item-photo">🔄</div>';
+  var statusClass = t.status === '已媒合' ? 'tag-trade-matched' : t.status === '免費發放' ? 'tag-trade-free' : t.status === '交換名單' ? 'tag-trade-list' : 'tag-trade-open';
+  var html = '<div class="item-card" data-trade-id="'+t.id+'">';
+  html += photo;
+  html += '<div class="item-main">';
+  html += '  <div class="item-top-row">';
+  html += '    <div><p class="item-name">'+esc(t.name)+'</p><p class="item-idol">'+(idol?esc(idol.name):'未分類')+'</p></div>';
+  html += '  </div>';
+  if(t.note){ html += '  <p style="font-size:12px;color:var(--plum-500);margin:4px 0 0;">'+esc(t.note)+'</p>'; }
+  html += '  <div class="item-tags">';
+  html += '    <span class="tag '+statusClass+'">'+esc(t.status)+'</span>';
+  html += '    <span class="item-date">'+fmtDate(t.date)+'</span>';
+  html += '  </div>';
+  html += '</div></div>';
+  return html;
+}
+
+function renderPhotoWall(){
+  var entries = [];
+  state.items.forEach(function(it){
+    if(state.filterIdol !== 'all' && it.idolId !== state.filterIdol) return;
+    (it.photos||[]).forEach(function(p){
+      entries.push({ photo: p, name: it.name, idolId: it.idolId, date: it.date });
+    });
+  });
+  state.trades.forEach(function(t){
+    if(state.filterIdol !== 'all' && t.idolId !== state.filterIdol) return;
+    (t.photos||[]).forEach(function(p){
+      entries.push({ photo: p, name: t.name, idolId: t.idolId, date: t.date });
+    });
+  });
+  entries.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+  if(entries.length === 0){
+    return '<div class="empty-state"><div class="emoji">📷</div><p>還沒有任何照片</p><p>在消費清單或應援交換新增紀錄時上傳照片吧</p></div>';
+  }
+  var html = '<div class="photo-grid">';
+  entries.forEach(function(en, idx){
+    var idol = idolById(en.idolId);
+    html += '<div class="photo-grid-item" data-photo-idx="'+idx+'">';
+    html += '  <img src="'+en.photo+'">';
+    html += '  <div class="photo-caption">'+esc(en.name)+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  window._photoWallEntries = entries;
   return html;
 }
 
@@ -581,16 +686,38 @@ function bindListEvents(){
     };
   });
 
-  document.querySelectorAll('.item-card').forEach(function(el){
+  document.querySelectorAll('.item-card[data-id]').forEach(function(el){
     el.onclick = function(){
       var id = el.getAttribute('data-id');
       var item = state.items.find(function(i){ return i.id===id; });
       if(item) openItemModal(item);
     };
   });
+
+  document.querySelectorAll('.item-card[data-trade-id]').forEach(function(el){
+    el.onclick = function(){
+      var id = el.getAttribute('data-trade-id');
+      var trade = state.trades.find(function(t){ return t.id===id; });
+      if(trade) openTradeModal(trade);
+    };
+  });
+
+  document.querySelectorAll('.photo-grid-item').forEach(function(el){
+    el.onclick = function(){
+      var idx = parseInt(el.getAttribute('data-photo-idx'),10);
+      var entry = window._photoWallEntries && window._photoWallEntries[idx];
+      if(entry) openLightbox(entry);
+    };
+  });
+
+  var fab = document.getElementById('fabBtn');
+  if(fab) fab.style.display = (state.tab === 'photos') ? 'none' : 'flex';
 }
 
-document.getElementById('fabBtn').onclick = function(){ openItemModal(null); };
+document.getElementById('fabBtn').onclick = function(){
+  if(state.tab === 'trade') openTradeModal(null);
+  else openItemModal(null);
+};
 
 /* ---------- IDOL MODAL (manage all idols, long press on chip could open too) ---------- */
 function openIdolModal(){
@@ -910,6 +1037,157 @@ function openItemModal(existingItem){
     render();
     toast(isEdit ? '已儲存變更' : '已新增紀錄');
   };
+}
+
+/* ---------- TRADE MODAL (應援交換) ---------- */
+function openTradeModal(existingTrade){
+  var isEdit = !!existingTrade;
+  var draft = isEdit ? JSON.parse(JSON.stringify(existingTrade)) : {
+    id: uid(),
+    idolId: state.idols[0] ? state.idols[0].id : null,
+    name: '',
+    note: '',
+    status: '可交換',
+    date: new Date().toISOString().slice(0,10),
+    photos: []
+  };
+
+  var overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+
+  var html = '';
+  html += '<div class="modal-sheet">';
+  html += '  <div class="modal-head"><p class="modal-title">'+(isEdit?'編輯應援交換':'新增應援交換')+'</p><button class="modal-close" id="closeTradeModal">✕</button></div>';
+
+  html += '  <div class="field"><label>追星對象</label><select id="tradeIdolSelect">';
+  if(state.idols.length===0){ html += '<option value="">尚未新增對象</option>'; }
+  state.idols.forEach(function(idol){
+    html += '<option value="'+idol.id+'"'+(draft.idolId===idol.id?' selected':'')+'>'+esc(idol.name)+'</option>';
+  });
+  html += '  </select></div>';
+
+  html += '  <div class="field"><label>商品名稱</label><input type="text" id="tradeName" value="'+esc(draft.name)+'" placeholder="例如：小卡交換 second album"></div>';
+  html += '  <div class="field"><label>說明</label><textarea id="tradeNote" rows="3" placeholder="想交換的內容、條件等">'+esc(draft.note)+'</textarea></div>';
+
+  html += '  <div class="field"><label>狀態</label><div class="seg" style="flex-wrap:wrap;">';
+  ['可交換','免費發放','交換名單','已媒合'].forEach(function(s){
+    html += '    <button type="button" class="seg-btn'+(draft.status===s?' active':'')+'" data-tradestatus="'+s+'" style="flex:1 1 45%;">'+s+'</button>';
+  });
+  html += '  </div></div>';
+
+  html += '  <div class="field"><label>日期</label><input type="date" id="tradeDate" value="'+draft.date+'"></div>';
+
+  html += '  <div class="field"><label>照片</label><div class="photo-row" id="tradePhotoRow"></div><input type="file" id="tradePhotoInput" accept="image/*" multiple style="display:none;"></div>';
+
+  html += '  <button class="btn-primary" id="saveTradeBtn">'+(isEdit?'儲存變更':'新增貼文')+'</button>';
+  if(isEdit){
+    html += '  <button class="btn-danger-text" id="deleteTradeBtn">刪除這筆貼文</button>';
+  } else {
+    html += '  <button class="btn-secondary" id="cancelTradeBtn">取消</button>';
+  }
+  html += '</div>';
+
+  overlay.innerHTML = html;
+  document.body.appendChild(overlay);
+
+  function renderTradePhotoRow(){
+    var row = overlay.querySelector('#tradePhotoRow');
+    var h = '';
+    (draft.photos||[]).forEach(function(p, idx){
+      h += '<div class="photo-thumb-wrap"><img class="photo-thumb" src="'+p+'"><button class="photo-remove" data-rmtphoto="'+idx+'">✕</button></div>';
+    });
+    if((draft.photos||[]).length < 3){
+      h += '<div class="photo-add" id="tradePhotoAddBtn">＋</div>';
+    }
+    row.innerHTML = h;
+    var addBtn = row.querySelector('#tradePhotoAddBtn');
+    if(addBtn) addBtn.onclick = function(){ overlay.querySelector('#tradePhotoInput').click(); };
+    row.querySelectorAll('[data-rmtphoto]').forEach(function(btn){
+      btn.onclick = function(){
+        var idx = parseInt(btn.getAttribute('data-rmtphoto'),10);
+        draft.photos.splice(idx,1);
+        renderTradePhotoRow();
+      };
+    });
+  }
+  renderTradePhotoRow();
+
+  overlay.querySelector('#tradePhotoInput').onchange = function(e){
+    var files = Array.from(e.target.files || []);
+    var remaining = 3 - (draft.photos||[]).length;
+    files.slice(0, remaining).forEach(function(file){
+      resizeImage(file, 700, function(dataUrl){
+        draft.photos = draft.photos || [];
+        draft.photos.push(dataUrl);
+        renderTradePhotoRow();
+      });
+    });
+    e.target.value = '';
+  };
+
+  overlay.querySelectorAll('[data-tradestatus]').forEach(function(btn){
+    btn.onclick = function(){
+      overlay.querySelectorAll('[data-tradestatus]').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      draft.status = btn.getAttribute('data-tradestatus');
+    };
+  });
+
+  overlay.querySelector('#closeTradeModal').onclick = function(){ closeModal(overlay); };
+  overlay.onclick = function(e){ if(e.target===overlay) closeModal(overlay); };
+  var cancelBtn = overlay.querySelector('#cancelTradeBtn');
+  if(cancelBtn) cancelBtn.onclick = function(){ closeModal(overlay); };
+
+  var deleteBtn = overlay.querySelector('#deleteTradeBtn');
+  if(deleteBtn){
+    deleteBtn.onclick = async function(){
+      if(!confirm('確定要刪除這筆應援交換貼文嗎？')) return;
+      state.trades = state.trades.filter(function(t){ return t.id !== draft.id; });
+      await deleteTradeStorage(draft.id);
+      closeModal(overlay);
+      render();
+      toast('已刪除');
+    };
+  }
+
+  overlay.querySelector('#saveTradeBtn').onclick = async function(){
+    var name = overlay.querySelector('#tradeName').value.trim();
+    if(!name){ toast('請輸入商品名稱'); return; }
+    if(!overlay.querySelector('#tradeIdolSelect').value){ toast('請先新增追星對象'); return; }
+
+    draft.idolId = overlay.querySelector('#tradeIdolSelect').value;
+    draft.name = name;
+    draft.note = overlay.querySelector('#tradeNote').value.trim();
+    draft.date = overlay.querySelector('#tradeDate').value || new Date().toISOString().slice(0,10);
+
+    var existingIdx = state.trades.findIndex(function(t){ return t.id === draft.id; });
+    if(existingIdx >= 0) state.trades[existingIdx] = draft;
+    else state.trades.unshift(draft);
+
+    state.trades.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+
+    await saveTrade(draft);
+    closeModal(overlay);
+    render();
+    toast(isEdit ? '已儲存變更' : '已新增貼文');
+  };
+}
+
+/* ---------- PHOTO WALL LIGHTBOX ---------- */
+function openLightbox(entry){
+  var idol = idolById(entry.idolId);
+  var overlay = document.createElement('div');
+  overlay.className = 'modal-overlay center';
+  var html = '';
+  html += '<div class="modal-sheet">';
+  html += '  <div class="modal-head"><p class="modal-title">'+esc(entry.name)+'</p><button class="modal-close" id="closeLightbox">✕</button></div>';
+  html += '  <img class="lightbox-img" src="'+entry.photo+'">';
+  html += '  <p style="font-size:12.5px;color:var(--plum-500);margin:0 0 4px;">'+(idol?esc(idol.name):'未分類')+' · '+fmtDate(entry.date)+'</p>';
+  html += '</div>';
+  overlay.innerHTML = html;
+  document.body.appendChild(overlay);
+  overlay.querySelector('#closeLightbox').onclick = function(){ closeModal(overlay); };
+  overlay.onclick = function(e){ if(e.target===overlay) closeModal(overlay); };
 }
 
 function closeModal(overlay){
