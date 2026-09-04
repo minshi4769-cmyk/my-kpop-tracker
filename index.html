@@ -158,6 +158,7 @@
   .photo-grid-item img{ width:100%; height:100%; object-fit:cover; display:block; }
   .photo-caption{ position:absolute; bottom:0; left:0; right:0; background:rgba(61,38,87,0.55); color:#fff; font-size:10px; padding:3px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .lightbox-img{ width:100%; border-radius:16px; display:block; margin-bottom:10px; }
+  .item-address{ font-size:11.5px; color:var(--plum-500); margin:4px 0 0; display:flex; align-items:center; gap:3px; }
   .item-date{ font-size:10.5px; color:var(--plum-500); }
 
   .empty-state{ text-align:center; padding:60px 20px; color:var(--plum-500); }
@@ -301,6 +302,8 @@ var state = {
   items: [],
   trades: [],
   dailyPhotos: [],
+  cafes: [],
+  checkins: [],
   filterIdol: "all",
   tab: "expense",
   wishFilter: "all",
@@ -394,6 +397,20 @@ async function loadAll(){
     state.dailyPhotos = dailyPhotos;
   }catch(e){ state.dailyPhotos = []; }
 
+  try{
+    var cafesData = await fbGet('cafes');
+    var cafes = cafesData ? Object.keys(cafesData).map(function(k){ return cafesData[k]; }) : [];
+    cafes.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+    state.cafes = cafes;
+  }catch(e){ state.cafes = []; }
+
+  try{
+    var checkinsData = await fbGet('checkins');
+    var checkins = checkinsData ? Object.keys(checkinsData).map(function(k){ return checkinsData[k]; }) : [];
+    checkins.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+    state.checkins = checkins;
+  }catch(e){ state.checkins = []; }
+
   state.loaded = true;
 }
 
@@ -424,6 +441,20 @@ async function saveDailyPhoto(photoEntry){
 }
 async function deleteDailyPhotoStorage(id){
   await fbDelete('photos/'+id);
+}
+async function saveCafe(cafe){
+  var ok = await fbPut('cafes/'+cafe.id, cafe);
+  if(!ok) toast('儲存失敗，請檢查網路連線');
+}
+async function deleteCafeStorage(id){
+  await fbDelete('cafes/'+id);
+}
+async function saveCheckin(checkin){
+  var ok = await fbPut('checkins/'+checkin.id, checkin);
+  if(!ok) toast('儲存失敗，請檢查網路連線');
+}
+async function deleteCheckinStorage(id){
+  await fbDelete('checkins/'+id);
 }
 
 /* ---------- SEED DEFAULT ---------- */
@@ -502,6 +533,8 @@ function render(){
   html += '  <button class="tab-btn'+(state.tab==='expense'?' active':'')+'" data-tab="expense">消費清單</button>';
   html += '  <button class="tab-btn'+(state.tab==='wishlist'?' active':'')+'" data-tab="wishlist">願望清單</button>';
   html += '  <button class="tab-btn'+(state.tab==='trade'?' active':'')+'" data-tab="trade">應援交換</button>';
+  html += '  <button class="tab-btn'+(state.tab==='cafe'?' active':'')+'" data-tab="cafe">應援咖啡廳</button>';
+  html += '  <button class="tab-btn'+(state.tab==='checkin'?' active':'')+'" data-tab="checkin">同款打卡點</button>';
   html += '  <button class="tab-btn'+(state.tab==='photos'?' active':'')+'" data-tab="photos">照片牆</button>';
   html += '</div>';
 
@@ -515,6 +548,24 @@ function render(){
       html += '<div class="empty-state"><div class="emoji">🔄</div><p>還沒有應援交換的貼文</p><p>點右下角的「＋」新增一筆吧</p></div>';
     } else {
       trades.forEach(function(t){ html += renderTradeCard(t); });
+    }
+  } else if(state.tab === 'cafe'){
+    var cafes = state.cafes.filter(function(c){
+      return state.filterIdol === 'all' || c.idolId === state.filterIdol;
+    });
+    if(cafes.length === 0){
+      html += '<div class="empty-state"><div class="emoji">☕</div><p>還沒有應援咖啡廳紀錄</p><p>點右下角的「＋」新增一筆吧</p></div>';
+    } else {
+      cafes.forEach(function(cf){ html += renderCafeCard(cf); });
+    }
+  } else if(state.tab === 'checkin'){
+    var checkins = state.checkins.filter(function(ck){
+      return state.filterIdol === 'all' || ck.idolId === state.filterIdol;
+    });
+    if(checkins.length === 0){
+      html += '<div class="empty-state"><div class="emoji">📍</div><p>還沒有同款打卡點紀錄</p><p>點右下角的「＋」新增一筆吧</p></div>';
+    } else {
+      checkins.forEach(function(ck){ html += renderCheckinCard(ck); });
     }
   } else if(state.tab === 'photos'){
     html += renderPhotoWall();
@@ -587,6 +638,42 @@ function renderTradeCard(t){
     html += '    <span class="tag '+exClass+'">'+esc(ex.account || '未填帳號')+' · '+esc(ex.status)+'</span>';
   });
   html += '    <span class="item-date">'+fmtDate(t.date)+'</span>';
+  html += '  </div>';
+  html += '</div></div>';
+  return html;
+}
+
+function renderCafeCard(cf){
+  var idol = idolById(cf.idolId);
+  var photo = (cf.photos && cf.photos[0]) ? '<img class="item-photo" src="'+cf.photos[0]+'">' : '<div class="item-photo">☕</div>';
+  var html = '<div class="item-card" data-cafe-id="'+cf.id+'">';
+  html += photo;
+  html += '<div class="item-main">';
+  html += '  <div class="item-top-row">';
+  html += '    <div><p class="item-name">'+esc(cf.name)+'</p><p class="item-idol">'+(idol?esc(idol.name):'未分類')+'</p></div>';
+  html += '  </div>';
+  if(cf.address){ html += '  <p class="item-address">📍 '+esc(cf.address)+'</p>'; }
+  if(cf.note){ html += '  <p style="font-size:12px;color:var(--plum-500);margin:4px 0 0;">'+esc(cf.note)+'</p>'; }
+  html += '  <div class="item-tags">';
+  html += '    <span class="item-date">'+fmtDate(cf.date)+'</span>';
+  html += '  </div>';
+  html += '</div></div>';
+  return html;
+}
+
+function renderCheckinCard(ck){
+  var idol = idolById(ck.idolId);
+  var photo = (ck.photos && ck.photos[0]) ? '<img class="item-photo" src="'+ck.photos[0]+'">' : '<div class="item-photo">📍</div>';
+  var html = '<div class="item-card" data-checkin-id="'+ck.id+'">';
+  html += photo;
+  html += '<div class="item-main">';
+  html += '  <div class="item-top-row">';
+  html += '    <div><p class="item-name">'+esc(ck.name)+'</p><p class="item-idol">'+(idol?esc(idol.name):'未分類')+'</p></div>';
+  html += '  </div>';
+  if(ck.address){ html += '  <p class="item-address">📍 '+esc(ck.address)+'</p>'; }
+  if(ck.note){ html += '  <p style="font-size:12px;color:var(--plum-500);margin:4px 0 0;">'+esc(ck.note)+'</p>'; }
+  html += '  <div class="item-tags">';
+  html += '    <span class="item-date">'+fmtDate(ck.date)+'</span>';
   html += '  </div>';
   html += '</div></div>';
   return html;
@@ -707,6 +794,22 @@ function bindListEvents(){
     };
   });
 
+  document.querySelectorAll('.item-card[data-cafe-id]').forEach(function(el){
+    el.onclick = function(){
+      var id = el.getAttribute('data-cafe-id');
+      var cafe = state.cafes.find(function(c){ return c.id===id; });
+      if(cafe) openCafeModal(cafe);
+    };
+  });
+
+  document.querySelectorAll('.item-card[data-checkin-id]').forEach(function(el){
+    el.onclick = function(){
+      var id = el.getAttribute('data-checkin-id');
+      var checkin = state.checkins.find(function(c){ return c.id===id; });
+      if(checkin) openCheckinModal(checkin);
+    };
+  });
+
   document.querySelectorAll('.photo-grid-item').forEach(function(el){
     el.onclick = function(){
       var id = el.getAttribute('data-daily-photo-id');
@@ -718,6 +821,8 @@ function bindListEvents(){
 
 document.getElementById('fabBtn').onclick = function(){
   if(state.tab === 'trade') openTradeModal(null);
+  else if(state.tab === 'cafe') openCafeModal(null);
+  else if(state.tab === 'checkin') openCheckinModal(null);
   else if(state.tab === 'photos') openPhotoModal(null);
   else openItemModal(null);
 };
@@ -1367,6 +1472,245 @@ function openPhotoModal(existingPhoto){
     closeModal(overlay);
     render();
     toast(isEdit ? '已儲存變更' : '已新增照片');
+  };
+}
+
+
+function openCafeModal(existingEntry){
+  var isEdit = !!existingEntry;
+  var draft = isEdit ? JSON.parse(JSON.stringify(existingEntry)) : {
+    id: uid(),
+    idolId: state.idols[0] ? state.idols[0].id : null,
+    name: '',
+    address: '',
+    note: '',
+    date: new Date().toISOString().slice(0,10),
+    photos: []
+  };
+
+  var overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+
+  var html = '';
+  html += '<div class="modal-sheet">';
+  html += '  <div class="modal-head"><p class="modal-title">'+(isEdit?'編輯應援咖啡廳':'新增應援咖啡廳')+'</p><button class="modal-close" id="closeCafeModal">✕</button></div>';
+
+  html += '  <div class="field"><label>追星對象</label><select id="cafeIdolSelect">';
+  if(state.idols.length===0){ html += '<option value="">尚未新增對象</option>'; }
+  state.idols.forEach(function(idol){
+    html += '<option value="'+idol.id+'"'+(draft.idolId===idol.id?' selected':'')+'>'+esc(idol.name)+'</option>';
+  });
+  html += '  </select></div>';
+
+  html += '  <div class="field"><label>咖啡廳名稱</label><input type="text" id="cafeName" value="'+esc(draft.name)+'" placeholder="例如：OO主題應援咖啡廳"></div>';
+  html += '  <div class="field"><label>地址</label><input type="text" id="cafeAddress" value="'+esc(draft.address||'')+'" placeholder="輸入地址或地點位置"></div>';
+  html += '  <div class="field"><label>說明（選填）</label><textarea id="cafeNote" rows="3" placeholder="備註、心得等">'+esc(draft.note||'')+'</textarea></div>';
+  html += '  <div class="field"><label>日期</label><input type="date" id="cafeDate" value="'+draft.date+'"></div>';
+  html += '  <div class="field"><label>照片</label><div class="photo-row" id="cafePhotoRow"></div><input type="file" id="cafePhotoInput" accept="image/*" multiple style="display:none;"></div>';
+
+  html += '  <button class="btn-primary" id="saveCafeBtn">'+(isEdit?'儲存變更':'新增紀錄')+'</button>';
+  if(isEdit){
+    html += '  <button class="btn-danger-text" id="deleteCafeBtn">刪除這筆紀錄</button>';
+  } else {
+    html += '  <button class="btn-secondary" id="cancelCafeBtn">取消</button>';
+  }
+  html += '</div>';
+
+  overlay.innerHTML = html;
+  document.body.appendChild(overlay);
+
+  function renderPhotoRowLocal(){
+    var row = overlay.querySelector('#cafePhotoRow');
+    var h = '';
+    (draft.photos||[]).forEach(function(p, idx){
+      h += '<div class="photo-thumb-wrap"><img class="photo-thumb" src="'+p+'"><button class="photo-remove" data-cafermphoto="'+idx+'">✕</button></div>';
+    });
+    if((draft.photos||[]).length < 3){
+      h += '<div class="photo-add" id="cafePhotoAddBtn">＋</div>';
+    }
+    row.innerHTML = h;
+    var addBtn = row.querySelector('#cafePhotoAddBtn');
+    if(addBtn) addBtn.onclick = function(){ overlay.querySelector('#cafePhotoInput').click(); };
+    row.querySelectorAll('[data-cafermphoto]').forEach(function(btn){
+      btn.onclick = function(){
+        var idx = parseInt(btn.getAttribute('data-cafermphoto'),10);
+        draft.photos.splice(idx,1);
+        renderPhotoRowLocal();
+      };
+    });
+  }
+  renderPhotoRowLocal();
+
+  overlay.querySelector('#cafePhotoInput').onchange = function(e){
+    var files = Array.from(e.target.files || []);
+    var remaining = 3 - (draft.photos||[]).length;
+    files.slice(0, remaining).forEach(function(file){
+      resizeImage(file, 700, function(dataUrl){
+        draft.photos = draft.photos || [];
+        draft.photos.push(dataUrl);
+        renderPhotoRowLocal();
+      });
+    });
+    e.target.value = '';
+  };
+
+  overlay.querySelector('#closeCafeModal').onclick = function(){ closeModal(overlay); };
+  overlay.onclick = function(e){ if(e.target===overlay) closeModal(overlay); };
+  var cancelBtn = overlay.querySelector('#cancelCafeBtn');
+  if(cancelBtn) cancelBtn.onclick = function(){ closeModal(overlay); };
+
+  var deleteBtn = overlay.querySelector('#deleteCafeBtn');
+  if(deleteBtn){
+    deleteBtn.onclick = async function(){
+      if(!confirm('確定要刪除這筆紀錄嗎？')) return;
+      state.cafes = state.cafes.filter(function(x){ return x.id !== draft.id; });
+      await deleteCafeStorage(draft.id);
+      closeModal(overlay);
+      render();
+      toast('已刪除');
+    };
+  }
+
+  overlay.querySelector('#saveCafeBtn').onclick = async function(){
+    var name = overlay.querySelector('#cafeName').value.trim();
+    if(!name){ toast('請輸入咖啡廳名稱'); return; }
+    if(!overlay.querySelector('#cafeIdolSelect').value){ toast('請先新增追星對象'); return; }
+
+    draft.idolId = overlay.querySelector('#cafeIdolSelect').value;
+    draft.name = name;
+    draft.address = overlay.querySelector('#cafeAddress').value.trim();
+    draft.note = overlay.querySelector('#cafeNote').value.trim();
+    draft.date = overlay.querySelector('#cafeDate').value || new Date().toISOString().slice(0,10);
+
+    var existingIdx = state.cafes.findIndex(function(x){ return x.id === draft.id; });
+    if(existingIdx >= 0) state.cafes[existingIdx] = draft;
+    else state.cafes.unshift(draft);
+
+    state.cafes.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+
+    await saveCafe(draft);
+    closeModal(overlay);
+    render();
+    toast(isEdit ? '已儲存變更' : '已新增紀錄');
+  };
+}
+
+function openCheckinModal(existingEntry){
+  var isEdit = !!existingEntry;
+  var draft = isEdit ? JSON.parse(JSON.stringify(existingEntry)) : {
+    id: uid(),
+    idolId: state.idols[0] ? state.idols[0].id : null,
+    name: '',
+    address: '',
+    note: '',
+    date: new Date().toISOString().slice(0,10),
+    photos: []
+  };
+
+  var overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+
+  var html = '';
+  html += '<div class="modal-sheet">';
+  html += '  <div class="modal-head"><p class="modal-title">'+(isEdit?'編輯同款打卡點':'新增同款打卡點')+'</p><button class="modal-close" id="closeCheckinModal">✕</button></div>';
+
+  html += '  <div class="field"><label>追星對象</label><select id="checkinIdolSelect">';
+  if(state.idols.length===0){ html += '<option value="">尚未新增對象</option>'; }
+  state.idols.forEach(function(idol){
+    html += '<option value="'+idol.id+'"'+(draft.idolId===idol.id?' selected':'')+'>'+esc(idol.name)+'</option>';
+  });
+  html += '  </select></div>';
+
+  html += '  <div class="field"><label>地點名稱</label><input type="text" id="checkinName" value="'+esc(draft.name)+'" placeholder="例如：OO拍攝地、同款景點"></div>';
+  html += '  <div class="field"><label>地址</label><input type="text" id="checkinAddress" value="'+esc(draft.address||'')+'" placeholder="輸入地址或地點位置"></div>';
+  html += '  <div class="field"><label>說明（選填）</label><textarea id="checkinNote" rows="3" placeholder="備註、心得等">'+esc(draft.note||'')+'</textarea></div>';
+  html += '  <div class="field"><label>日期</label><input type="date" id="checkinDate" value="'+draft.date+'"></div>';
+  html += '  <div class="field"><label>照片</label><div class="photo-row" id="checkinPhotoRow"></div><input type="file" id="checkinPhotoInput" accept="image/*" multiple style="display:none;"></div>';
+
+  html += '  <button class="btn-primary" id="saveCheckinBtn">'+(isEdit?'儲存變更':'新增紀錄')+'</button>';
+  if(isEdit){
+    html += '  <button class="btn-danger-text" id="deleteCheckinBtn">刪除這筆紀錄</button>';
+  } else {
+    html += '  <button class="btn-secondary" id="cancelCheckinBtn">取消</button>';
+  }
+  html += '</div>';
+
+  overlay.innerHTML = html;
+  document.body.appendChild(overlay);
+
+  function renderPhotoRowLocal(){
+    var row = overlay.querySelector('#checkinPhotoRow');
+    var h = '';
+    (draft.photos||[]).forEach(function(p, idx){
+      h += '<div class="photo-thumb-wrap"><img class="photo-thumb" src="'+p+'"><button class="photo-remove" data-checkinrmphoto="'+idx+'">✕</button></div>';
+    });
+    if((draft.photos||[]).length < 3){
+      h += '<div class="photo-add" id="checkinPhotoAddBtn">＋</div>';
+    }
+    row.innerHTML = h;
+    var addBtn = row.querySelector('#checkinPhotoAddBtn');
+    if(addBtn) addBtn.onclick = function(){ overlay.querySelector('#checkinPhotoInput').click(); };
+    row.querySelectorAll('[data-checkinrmphoto]').forEach(function(btn){
+      btn.onclick = function(){
+        var idx = parseInt(btn.getAttribute('data-checkinrmphoto'),10);
+        draft.photos.splice(idx,1);
+        renderPhotoRowLocal();
+      };
+    });
+  }
+  renderPhotoRowLocal();
+
+  overlay.querySelector('#checkinPhotoInput').onchange = function(e){
+    var files = Array.from(e.target.files || []);
+    var remaining = 3 - (draft.photos||[]).length;
+    files.slice(0, remaining).forEach(function(file){
+      resizeImage(file, 700, function(dataUrl){
+        draft.photos = draft.photos || [];
+        draft.photos.push(dataUrl);
+        renderPhotoRowLocal();
+      });
+    });
+    e.target.value = '';
+  };
+
+  overlay.querySelector('#closeCheckinModal').onclick = function(){ closeModal(overlay); };
+  overlay.onclick = function(e){ if(e.target===overlay) closeModal(overlay); };
+  var cancelBtn = overlay.querySelector('#cancelCheckinBtn');
+  if(cancelBtn) cancelBtn.onclick = function(){ closeModal(overlay); };
+
+  var deleteBtn = overlay.querySelector('#deleteCheckinBtn');
+  if(deleteBtn){
+    deleteBtn.onclick = async function(){
+      if(!confirm('確定要刪除這筆紀錄嗎？')) return;
+      state.checkins = state.checkins.filter(function(x){ return x.id !== draft.id; });
+      await deleteCheckinStorage(draft.id);
+      closeModal(overlay);
+      render();
+      toast('已刪除');
+    };
+  }
+
+  overlay.querySelector('#saveCheckinBtn').onclick = async function(){
+    var name = overlay.querySelector('#checkinName').value.trim();
+    if(!name){ toast('請輸入地點名稱'); return; }
+    if(!overlay.querySelector('#checkinIdolSelect').value){ toast('請先新增追星對象'); return; }
+
+    draft.idolId = overlay.querySelector('#checkinIdolSelect').value;
+    draft.name = name;
+    draft.address = overlay.querySelector('#checkinAddress').value.trim();
+    draft.note = overlay.querySelector('#checkinNote').value.trim();
+    draft.date = overlay.querySelector('#checkinDate').value || new Date().toISOString().slice(0,10);
+
+    var existingIdx = state.checkins.findIndex(function(x){ return x.id === draft.id; });
+    if(existingIdx >= 0) state.checkins[existingIdx] = draft;
+    else state.checkins.unshift(draft);
+
+    state.checkins.sort(function(a,b){ return new Date(b.date) - new Date(a.date); });
+
+    await saveCheckin(draft);
+    closeModal(overlay);
+    render();
+    toast(isEdit ? '已儲存變更' : '已新增紀錄');
   };
 }
 
